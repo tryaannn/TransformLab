@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3D Design Tool - Enhanced Features</title>
+    <title>TransformLab</title>
+    <!-- favicon -->
+    <link rel="icon" href="assets/logo-bulat.png" />
+    <link rel="apple-touch-icon" href="assets/logo-bulat.png" />
+    <meta name="msapplication-TileImage" content="assets/logo-bulat.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       body,
@@ -18,6 +22,12 @@
         display: block;
         width: 100%;
         height: 100%;
+      }
+      .logo-img {
+        width: 20rem;
+        height: auto;
+        margin: -70px;
+        margin-left: 0px;
       }
       .toolbar-button {
         padding: 0.5rem 1rem;
@@ -37,7 +47,12 @@
       id="assetControls"
       class="absolute top-0 left-0 right-0 bg-white bg-opacity-90 p-4 flex items-center justify-between shadow-md"
     >
-    <a href="index.html"><span class="text-2xl font-bold text-blue-600 ml-8">TransformLab</span></a>
+      <a href="index.html">
+        <img
+          class="logo-img"
+          src="assets/logo-transformlab.png"
+          alt="logo-transformlab"
+      /></a>
       <div class="flex items-center space-x-2 mr-4">
         <!-- Wall Controls -->
         <div class="flex space-x-2">
@@ -195,7 +210,6 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/DragControls.js"></script>
-    
 
     <!-- Our Scripts -->
     <script src="script/setup.js"></script>

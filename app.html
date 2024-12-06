@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D Design Tool - Enhanced Features</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .toolbar-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem; /* text-sm */
+        font-weight: 500;
+        color: white;
+        border-radius: 0.375rem; /* rounded-md */
+      }
+    </style>
+  </head>
+  <body class="relative m-0 overflow-hidden bg-gray-100">
+    <!-- Main Canvas -->
+    <canvas class="block w-full h-full bg-white"></canvas>
+
+    <!-- Top Toolbar -->
+    <div
+      id="assetControls"
+      class="absolute top-0 left-0 right-0 bg-white bg-opacity-90 p-4 flex items-center justify-between shadow-md"
+    >
+    <a href="index.html"><span class="text-2xl font-bold text-blue-600 ml-8">TransformLab</span></a>
+      <div class="flex items-center space-x-2 mr-4">
+        <!-- Wall Controls -->
+        <div class="flex space-x-2">
+          <button
+            id="addWall"
+            class="toolbar-button bg-blue-500 hover:bg-blue-600"
+          >
+            Wall 1
+          </button>
+          <button
+            id="addWall2"
+            class="toolbar-button bg-blue-500 hover:bg-blue-600"
+          >
+            Wall 2
+          </button>
+          <button
+            id="addWall3"
+            class="toolbar-button bg-blue-500 hover:bg-blue-600"
+          >
+            Wall 3
+          </button>
+        </div>
+
+        <!-- Other Build Controls -->
+        <div class="flex space-x-2">
+          <button
+            id="addFloor"
+            class="toolbar-button bg-green-500 hover:bg-green-600"
+          >
+            Floor
+          </button>
+          <button
+            id="addRoof"
+            class="toolbar-button bg-yellow-500 hover:bg-yellow-600"
+          >
+            Roof
+          </button>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="flex space-x-2 ml-4 border-l border-gray-300 pl-4">
+          <button
+            id="duplicateObject"
+            class="toolbar-button bg-indigo-500 hover:bg-indigo-600"
+          >
+            Duplicate
+          </button>
+          <button
+            id="saveScene"
+            class="toolbar-button bg-teal-500 hover:bg-teal-600"
+          >
+            Save Image
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Toolbar -->
+    <div
+      id="toolControls"
+      class="absolute bottom-0 left-0 right-0 bg-white bg-opacity-90 p-3 grid gap-2 text-center shadow-md"
+    >
+      <!-- History and Delete Controls -->
+      <div class="flex justify-center space-x-2 mb-2">
+        <button
+          id="undo"
+          class="toolbar-button bg-orange-500 hover:bg-orange-600"
+        >
+          Undo
+        </button>
+        <button
+          id="redo"
+          class="toolbar-button bg-orange-500 hover:bg-orange-600"
+        >
+          Redo
+        </button>
+        <button
+          id="removeSelected"
+          class="toolbar-button bg-red-500 hover:bg-red-600"
+        >
+          Remove Selected
+        </button>
+      </div>
+
+      <!-- Object Manipulation Controls -->
+      <div class="grid grid-cols-4 gap-2">
+        <!-- Scale Controls -->
+        <div class="space-y-2">
+          <button
+            id="scaleUp"
+            class="toolbar-button w-full bg-purple-500 hover:bg-purple-600"
+          >
+            Size +
+          </button>
+          <button
+            id="scaleDown"
+            class="toolbar-button w-full bg-purple-500 hover:bg-purple-600"
+          >
+            Size -
+          </button>
+        </div>
+
+        <!-- Horizontal Rotation -->
+        <div class="space-y-2">
+          <button
+            id="rotateLeft"
+            class="toolbar-button w-full bg-gray-500 hover:bg-gray-600"
+          >
+            ← Rotate
+          </button>
+          <button
+            id="rotateRight"
+            class="toolbar-button w-full bg-gray-500 hover:bg-gray-600"
+          >
+            Rotate →
+          </button>
+        </div>
+
+        <!-- Vertical Rotation -->
+        <div class="space-y-2">
+          <button
+            id="rotateUp"
+            class="toolbar-button w-full bg-gray-500 hover:bg-gray-600"
+          >
+            ↑ Rotate
+          </button>
+          <button
+            id="rotateDown"
+            class="toolbar-button w-full bg-gray-500 hover:bg-gray-600"
+          >
+            Rotate ↓
+          </button>
+        </div>
+
+        <!-- Z-axis Rotation -->
+        <div class="space-y-2">
+          <button
+            id="rotateVerticalLeft"
+            class="toolbar-button w-full bg-gray-500 hover:bg-gray-600"
+          >
+            ⟲ Roll
+          </button>
+          <button
+            id="rotateVerticalRight"
+            class="toolbar-button w-full bg-gray-500 hover:bg-gray-600"
+          >
+            Roll ⟳
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Required Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/DragControls.js"></script>
+    
+
+    <!-- Our Scripts -->
+    <script src="script/setup.js"></script>
+    <script src="script/history-manager.js"></script>
+    <script src="script/object-manager.js"></script>
+    <script src="script/controls-manager.js"></script>
+  </body>
+</html>
